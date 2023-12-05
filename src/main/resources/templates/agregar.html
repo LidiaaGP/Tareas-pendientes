@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Plantilla</title>
+	<link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+	<div th:include="plantilla.html::cabecera"></div>
+	
+    <main>
+		<form th:action="@{/guardarTarea}" method="post" th:object="${tarea}" >
+			<h2>Agregar tarea</h2><br>
+			<input type="text" name="nombre" th:field="*{titulo}" required placeholder="Título tarea"><br>
+			<input type="text" name="descripcion" th:field="*{descripcion}" required placeholder="Descripcion tarea"><br>
+			<input type="text" name="fecha" th:field="*{fecha}" required placeholder="Fecha tarea"><br>
+			<select name="prioridad.id" th:field="*{prioridad.id}" required>
+			<option th:each="elemento : ${prioridades}" th:value="${elemento.id}" th:text="${elemento.prioridad}"></option>
+			</select><br><br>
+			
+			<input type="submit" value="Añadir">
+		
+		</form>
+    </main>
+
+    <div th:include="plantilla.html::pie"></div>
+</body>
+</html>

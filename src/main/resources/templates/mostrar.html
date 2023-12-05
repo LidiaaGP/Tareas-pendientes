@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+	<div th:include="plantilla.html::cabecera"></div>
+	<main>
+		<br>
+		<table>
+			<thead>
+				<tr>
+					<th>Título</th>
+					<th>Descripcion</th>
+					<th>Fecha</th>
+					<th>Prioridad</th>
+					<th>Opciones</th>
+				</tr>
+			</thead>
+			<tbody th:each="objeto : ${tareas}">
+				<tr>
+					<td th:text="${objeto.titulo}"></td>
+					<td th:text="${objeto.descripcion}"></td>
+					<td th:text="${objeto.fecha}"></td>
+					<td th:text="${objeto.prioridad.prioridad}"></td>
+					<td>
+						<form th:action="@{/borrarTarea}" th:method="post" th:object="${objeto}">
+                            <input type="hidden" name="id" th:value="${objeto.id}" />
+                            <button type="submit" class="boton-borrar">Borrar</button>
+                        </form>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</main>
+	
+	<div th:include="plantilla.html::pie"></div>
+</body>
+</html>
